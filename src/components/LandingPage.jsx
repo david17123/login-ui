@@ -10,7 +10,7 @@ export default function LandingPage() {
   return (
     <Paper>
       <Typography variant="h5">Welcome, {loggedInUser.username}!</Typography>
-      <Typography variant="p">
+      <Typography variant="body1">
         This is your dashboard. It shows information that is most relevant to
         you.
       </Typography>

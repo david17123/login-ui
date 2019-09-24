@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
@@ -9,6 +10,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import { default as ErrorIcon} from '@material-ui/icons/Error'
 import { makeStyles } from '@material-ui/core'
+
+import doLogin from '../logic/login'
 
 const useStyles = makeStyles((theme) => ({
   contentContainer: {
@@ -28,28 +31,45 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoginPage() {
   const classes = useStyles()
+  const dispatch = useDispatch()
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [usernameError, setUsernameError] = React.useState('')
   const [passwordError, setPasswordError] = React.useState('')
 
   const validateForm = () => {
+    let noError = true
     if (!username) {
+      noError = true
       setUsernameError('Username cannot be empty')
     } else {
       setUsernameError('')
     }
 
     if (!password) {
+      noError = true
       setPasswordError('Password cannot be empty')
     } else {
       setPasswordError('')
     }
+
+    return noError
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    validateForm()
+    if (validateForm()) {
+      doLogin(username, password, dispatch).then((loginErrors) => {
+        if (loginErrors) {
+          if (loginErrors.username) {
+            setUsernameError(loginErrors.username)
+          }
+          if (loginErrors.password) {
+            setPasswordError(loginErrors.password)
+          }
+        }
+      })
+    }
     return false
   }
 
