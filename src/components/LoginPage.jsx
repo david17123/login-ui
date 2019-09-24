@@ -40,14 +40,14 @@ export default function LoginPage() {
   const validateForm = () => {
     let noError = true
     if (!username) {
-      noError = true
+      noError = false
       setUsernameError('Username cannot be empty')
     } else {
       setUsernameError('')
     }
 
     if (!password) {
-      noError = true
+      noError = false
       setPasswordError('Password cannot be empty')
     } else {
       setPasswordError('')
@@ -95,7 +95,7 @@ export default function LoginPage() {
             endAdornment: usernameError && (
               <InputAdornment position="end">
                 <Tooltip title={usernameError} placement="top">
-                  <ErrorIcon color="error" />
+                  <ErrorIcon color="error" data-testid="username-error-icon" />
                 </Tooltip>
               </InputAdornment>
             )
@@ -113,7 +113,7 @@ export default function LoginPage() {
             endAdornment: passwordError && (
               <InputAdornment position="end">
                 <Tooltip title={passwordError} placement="top">
-                  <ErrorIcon color="error" />
+                  <ErrorIcon color="error" data-testid="password-error-icon" />
                 </Tooltip>
               </InputAdornment>
             )

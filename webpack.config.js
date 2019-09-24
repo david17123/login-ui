@@ -28,6 +28,9 @@ const webpackConfig = (env = {}) => {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Login',
+        meta: {
+          viewport: 'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no',
+        },
       }),
     ],
   }
@@ -38,9 +41,6 @@ const webpackConfig = (env = {}) => {
       contentBase: path.join(__dirname, 'dist'),
       host: '0.0.0.0',
       hot: true,
-      meta: {
-        viewport: 'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no',
-      },
     }
   }
 

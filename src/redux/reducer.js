@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux'
-
 export const actions = {
   LOGIN: 'login',
   LOGOUT: 'logout',

@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 
-import reducer from './reducer'
+import reduxStore from './redux/store'
 import Main from './components/Main'
 
 const getMountPoint = (id = 'root') => {
@@ -17,8 +16,6 @@ const getMountPoint = (id = 'root') => {
   }
   return rootEl
 }
-
-const reduxStore = createStore(reducer)
 
 ReactDOM.render(
   (

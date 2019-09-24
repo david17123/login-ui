@@ -1,4 +1,4 @@
-import { loginActionCreator } from '../reducer'
+import { loginActionCreator } from '../redux/reducer'
 
 /**
  * Log in with the supplied credentials. This will update redux store upon
