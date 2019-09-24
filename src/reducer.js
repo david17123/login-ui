@@ -5,6 +5,13 @@ export const actions = {
   LOGOUT: 'logout',
 }
 
+export const loginActionCreator = (user) => ({
+  type: actions.LOGIN,
+  user,
+})
+
+export const logoutActionCreator = () => ({ type: actions.LOGOUT })
+
 export const initialState = {
   loggedInUser: null,
 }

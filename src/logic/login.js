@@ -1,4 +1,4 @@
-import { actions } from '../reducer'
+import { loginActionCreator } from '../reducer'
 
 /**
  * Log in with the supplied credentials. This will update redux store upon
@@ -35,7 +35,7 @@ export default async function doLogin(username, password, dispatch) {
   }
 
   if (matchedUser) {
-    dispatch({ type: actions.LOGIN, user: matchedUser })
+    dispatch(loginActionCreator(matchedUser))
     return null
   }
   return error
