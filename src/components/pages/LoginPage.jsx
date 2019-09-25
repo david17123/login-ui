@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -35,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   buttonLink: {
-    textAlign: 'right',
     marginTop: theme.spacing(1),
   },
 }))
@@ -153,8 +153,25 @@ export default function LoginPage({ history, location }) {
           >
             Forgot username or password
           </Link>
+          <Link
+            component="button"
+            onClick={() => history.push('/forgot-login')}
+            className={classes.buttonLink}
+          >
+            Register an account
+          </Link>
         </Box>
       </Paper>
     </Container>
   )
+}
+
+LoginPage.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+    state: PropTypes.any,
+  }).isRequired,
 }

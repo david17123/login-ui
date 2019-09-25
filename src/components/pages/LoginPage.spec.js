@@ -13,27 +13,44 @@ describe('LoginPage test', () => {
   })
 
   it('should render empty login form', async () => {
-    const { getByText, getByRole } = render(
+    const mockHistory = {
+      push: jest.fn(),
+    }
+    const mockLocation = {
+      pathname: '/login',
+    }
+    const { getByText, getAllByRole } = render(
       <Provider store={reduxStore}>
-        <LoginPage />
+        <LoginPage history={mockHistory} location={mockLocation} />
       </Provider>
     )
     expect(getByText('Login to your account')).toBeVisible()
     expect(getByText('Username')).toBeVisible()
     expect(getByText('Password')).toBeVisible()
-    expect(getByRole('button')).toBeVisible()
+
+    const submitButton = getAllByRole('button')
+      .filter(btn => /login/i.test(btn.textContent))
+    expect(submitButton.length).toBe(1)
+    expect(submitButton[0]).toBeVisible()
   })
 
   it('should render error on submitting empty form', async () => {
-    const { getByRole, getByTestId, getByText } = render(
+    const mockHistory = {
+      push: jest.fn(),
+    }
+    const mockLocation = {
+      pathname: '/login',
+    }
+    const { getAllByRole, findByTestId } = render(
       <Provider store={reduxStore}>
-        <LoginPage />
+        <LoginPage history={mockHistory} location={mockLocation} />
       </Provider>
     )
-    const submitButton = getByRole('button')
+    const submitButton = getAllByRole('button')
+      .filter(btn => /login/i.test(btn.textContent))[0]
     fireEvent.click(submitButton)
 
-    expect(getByTestId('username-error-icon')).toBeVisible()
-    expect(getByTestId('password-error-icon')).toBeVisible()
+    expect(await findByTestId('username-error-icon')).toBeVisible()
+    expect(await findByTestId('password-error-icon')).toBeVisible()
   })
 })
