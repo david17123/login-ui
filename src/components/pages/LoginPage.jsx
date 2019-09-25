@@ -158,7 +158,7 @@ export default function LoginPage({ history, location }) {
             onClick={() => history.push('/register')}
             className={classes.buttonLink}
           >
-            Register an account
+            Create an account
           </Link>
         </Box>
       </Paper>
