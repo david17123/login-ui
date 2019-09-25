@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import Box from '@material-ui/core/Box'
@@ -104,4 +105,10 @@ export default function ForgotLoginPage({ history }) {
       </Paper>
     </Container>
   )
+}
+
+ForgotLoginPage.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 }
