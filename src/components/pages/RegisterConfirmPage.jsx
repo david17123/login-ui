@@ -37,11 +37,19 @@ export default function RegisterConfirmPage() {
           to confirm their email address and properly activate the account.
           However, since this is just a demo app, none of the actual account
           creation routine is executed. Please login with username&nbsp;
-          <Typography className={classes.loginDetails} display="inline">
+          <Typography
+            component="span"
+            className={classes.loginDetails}
+            display="inline"
+          >
             john.smith
           </Typography>
           &nbsp;and password&nbsp;
-          <Typography className={classes.loginDetails} display="inline">
+          <Typography
+            component="span"
+            className={classes.loginDetails}
+            display="inline"
+          >
             logmein
           </Typography>.&nbsp;
           <Link href="/#/login">Go to login page.</Link>

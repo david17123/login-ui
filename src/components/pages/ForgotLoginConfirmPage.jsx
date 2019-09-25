@@ -37,11 +37,19 @@ export default function ForgotLoginConfirmPage() {
           user database and recovery email will only be sent of there is an
           account associated with the email. However, for demostration purposes
           only, please login with username&nbsp;
-          <Typography className={classes.loginDetails} display="inline">
+          <Typography
+            component="span"
+            className={classes.loginDetails}
+            display="inline"
+          >
             john.smith
           </Typography>
           &nbsp;and password&nbsp;
-          <Typography className={classes.loginDetails} display="inline">
+          <Typography
+            component="span"
+            className={classes.loginDetails}
+            display="inline"
+          >
             logmein
           </Typography>.&nbsp;
           <Link href="/#/login">Go to login page.</Link>
