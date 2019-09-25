@@ -1,32 +1,38 @@
 import React from 'react'
+import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-
-import Container from '@material-ui/core/Container'
-import { makeStyles } from '@material-ui/core/styles'
 
 import AppBar from './AppBar'
 import LandingPage from './LandingPage'
 import LoginPage from './LoginPage'
+import ForgotLoginPage from './ForgotLoginPage'
+import ForgotLoginConfirmPage from './ForgotLoginConfirmPage'
 
-const useStyles = makeStyles((theme) => ({
-  contentContainer: {
-    paddingTop: theme.spacing(3),
-    display: 'flex',
-    justifyContent: 'center',
-  },
-}))
-
-export default function Login() {
-  const classes = useStyles()
+const ProtectedHOC = (Component) => (...props) => {
   const loggedInUser = useSelector(state => state.loggedInUser)
+  const { location } = props[0]
 
+  if (loggedInUser) {
+    return <Component {...props} />
+  }
+  return <Redirect to={{
+    pathname: '/login',
+    state: { from: location },
+  }} />
+}
+
+export default function Main() {
   return (
     <React.Fragment>
       <AppBar />
-      <Container className={classes.contentContainer}>
-        {loggedInUser && <LandingPage />}
-        {!loggedInUser && <LoginPage />}
-      </Container>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={ProtectedHOC(LandingPage)} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/forgot-login" component={ForgotLoginPage} />
+          <Route path="/forgot-login-confirm" component={ForgotLoginConfirmPage} />
+        </Switch>
+      </Router>
     </React.Fragment>
   )
 }

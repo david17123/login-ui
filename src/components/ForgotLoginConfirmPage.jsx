@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import Container from '@material-ui/core/Container'
+import Link from '@material-ui/core/Link'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core'
@@ -18,9 +19,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginBottom: theme.spacing(2),
   },
+  loginDetails: {
+    fontWeight: 'bold',
+  },
 }))
 
-export default function LandingPage() {
+export default function ForgotLoginConfirmPage() {
   const classes = useStyles()
   const loggedInUser = useSelector(state => state.loggedInUser)
 
@@ -28,11 +32,21 @@ export default function LandingPage() {
     <Container className={classes.contentContainer}>
       <Paper className={classes.paper}>
         <Typography variant="h5" className={classes.title}>
-          Welcome, {loggedInUser.username}!
+          Check your inbox!
         </Typography>
         <Typography variant="body1">
-          This is your dashboard. It shows information that is most relevant to
-          you.
+          Normally the supplied email will be validated and checked against the
+          user database and recovery email will only be sent of there is an
+          account associated with the email. However, for demostration purposes
+          only, please login with username&nbsp;
+          <Typography className={classes.loginDetails} display="inline">
+            john.smith
+          </Typography>
+          &nbsp;and password&nbsp;
+          <Typography className={classes.loginDetails} display="inline">
+            logmein
+          </Typography>.&nbsp;
+          <Link href="/#/login">Go to login page.</Link>
         </Typography>
       </Paper>
     </Container>
