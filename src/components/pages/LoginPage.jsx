@@ -91,6 +91,13 @@ export default function LoginPage({ history, location }) {
     return false
   }
 
+  const inputFocus = React.createRef()
+  React.useEffect(() => {
+    if (inputFocus.current) {
+      inputFocus.current.focus()
+    }
+  }, [])
+
   return (
     <Container className={classes.contentContainer}>
       <Paper className={classes.paper}>
@@ -119,6 +126,7 @@ export default function LoginPage({ history, location }) {
                 </InputAdornment>
               )
             }}
+            inputRef={inputFocus}
           />
           <TextField
             className={classes.textInput}

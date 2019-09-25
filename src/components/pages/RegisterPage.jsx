@@ -94,6 +94,13 @@ export default function RegisterPage({ history }) {
     return false
   }
 
+  const inputFocus = React.createRef()
+  React.useEffect(() => {
+    if (inputFocus.current) {
+      inputFocus.current.focus()
+    }
+  }, [])
+
   return (
     <Container className={classes.contentContainer}>
       <Paper className={classes.paper}>
@@ -122,6 +129,7 @@ export default function RegisterPage({ history }) {
                 </InputAdornment>
               )
             }}
+            inputRef={inputFocus}
           />
           <TextField
             className={classes.textInput}

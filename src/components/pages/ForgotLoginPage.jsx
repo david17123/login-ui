@@ -61,6 +61,13 @@ export default function ForgotLoginPage({ history }) {
     return false
   }
 
+  const inputFocus = React.createRef()
+  React.useEffect(() => {
+    if (inputFocus.current) {
+      inputFocus.current.focus()
+    }
+  }, [])
+
   return (
     <Container className={classes.contentContainer}>
       <Paper className={classes.paper}>
@@ -92,6 +99,7 @@ export default function ForgotLoginPage({ history }) {
                 </InputAdornment>
               )
             }}
+            inputRef={inputFocus}
           />
           <Button
             type="submit"
