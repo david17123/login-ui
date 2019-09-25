@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import { default as ErrorIcon} from '@material-ui/icons/Error'
 import { makeStyles } from '@material-ui/core'
 
-import doLogin from '../logic/login'
+import doLogin from '../../logic/login'
 
 const useStyles = makeStyles((theme) => ({
   contentContainer: {
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonLink: {
     textAlign: 'right',
+    marginTop: theme.spacing(1),
   },
 }))
 
@@ -137,13 +138,6 @@ export default function LoginPage({ history, location }) {
               )
             }}
           />
-          <Link
-            component="button"
-            onClick={() => history.push('/forgot-login')}
-            className={classes.buttonLink}
-          >
-            Forgot username or password
-          </Link>
           <Button
             type="submit"
             color="primary"
@@ -152,6 +146,13 @@ export default function LoginPage({ history, location }) {
           >
             Login
           </Button>
+          <Link
+            component="button"
+            onClick={() => history.push('/forgot-login')}
+            className={classes.buttonLink}
+          >
+            Forgot username or password
+          </Link>
         </Box>
       </Paper>
     </Container>

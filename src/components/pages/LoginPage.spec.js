@@ -4,7 +4,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 
 import LoginPage from './LoginPage'
-import reduxStore from '../redux/store'
+import reduxStore from '../../redux/store'
 
 describe('LoginPage test', () => {
   afterEach(() => {

@@ -3,10 +3,10 @@ import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import AppBar from './AppBar'
-import LandingPage from './LandingPage'
-import LoginPage from './LoginPage'
-import ForgotLoginPage from './ForgotLoginPage'
-import ForgotLoginConfirmPage from './ForgotLoginConfirmPage'
+import LandingPage from './pages/LandingPage'
+import LoginPage from './pages/LoginPage'
+import ForgotLoginPage from './pages/ForgotLoginPage'
+import ForgotLoginConfirmPage from './pages/ForgotLoginConfirmPage'
 
 const ProtectedHOC = (Component) => (...props) => {
   const loggedInUser = useSelector(state => state.loggedInUser)
