@@ -23,20 +23,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function ForgotLoginConfirmPage() {
+export default function RegisterConfirmPage() {
   const classes = useStyles()
 
   return (
     <Container className={classes.contentContainer}>
       <Paper className={classes.paper}>
         <Typography variant="h5" className={classes.title}>
-          Check your inbox!
+          Account created!
         </Typography>
         <Typography variant="body1">
-          Normally the supplied email will be validated and checked against the
-          user database and recovery email will only be sent of there is an
-          account associated with the email. However, for demostration purposes
-          only, please login with username&nbsp;
+          For a complete and proper registration, the user will be sent an email
+          to confirm their email address and properly activate the account.
+          However, since this is just a demo app, none of the actual account
+          creation routine is executed. Please login with username&nbsp;
           <Typography className={classes.loginDetails} display="inline">
             john.smith
           </Typography>

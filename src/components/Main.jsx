@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 import AppBar from './AppBar'
 import LandingPage from './pages/LandingPage'
 import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+import RegisterConfirmPage from './pages/RegisterConfirmPage'
 import ForgotLoginPage from './pages/ForgotLoginPage'
 import ForgotLoginConfirmPage from './pages/ForgotLoginConfirmPage'
 
@@ -29,6 +31,8 @@ export default function Main() {
         <Switch>
           <Route exact path="/" component={ProtectedHOC(LandingPage)} />
           <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/register-confirm" component={RegisterConfirmPage} />
           <Route path="/forgot-login" component={ForgotLoginPage} />
           <Route path="/forgot-login-confirm" component={ForgotLoginConfirmPage} />
         </Switch>

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useDispatch } from 'react-redux'
 
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
@@ -13,8 +12,6 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import { default as ErrorIcon} from '@material-ui/icons/Error'
 import { makeStyles } from '@material-ui/core'
-
-import doLogin from '../../logic/login'
 
 const useStyles = makeStyles((theme) => ({
   contentContainer: {
@@ -40,16 +37,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function LoginPage({ history, location }) {
+export default function RegisterPage({ history }) {
   const classes = useStyles()
-  const dispatch = useDispatch()
+  const [email, setEmail] = React.useState('')
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const [emailError, setEmailError] = React.useState('')
   const [usernameError, setUsernameError] = React.useState('')
   const [passwordError, setPasswordError] = React.useState('')
 
   const validateForm = () => {
     let noError = true
+
+    if (!email) {
+      noError = false
+      setEmailError('Email cannot be empty')
+    } else if (!/^[^@]+@\w+\.\w+$/.test(email)) {
+      noError = false
+      setEmailError('Email is not valid')
+    } else {
+      setEmailError('')
+    }
+
     if (!username) {
       noError = false
       setUsernameError('Username cannot be empty')
@@ -70,23 +79,8 @@ export default function LoginPage({ history, location }) {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    const redirectTo = location.state && location.state.from
-      ? location.state.from.pathname
-      : '/'
-
     if (validateForm()) {
-      doLogin(username, password, dispatch).then((loginErrors) => {
-        if (loginErrors) {
-          if (loginErrors.username) {
-            setUsernameError(loginErrors.username)
-          }
-          if (loginErrors.password) {
-            setPasswordError(loginErrors.password)
-          }
-        } else {
-          history.push(redirectTo)
-        }
-      })
+      history.push('/register-confirm')
     }
     return false
   }
@@ -101,8 +95,25 @@ export default function LoginPage({ history, location }) {
           flexDirection="column"
         >
           <Typography variant="h5" className={classes.title}>
-            Login to your account
+            Create an account!
           </Typography>
+          <TextField
+            className={classes.textInput}
+            id="email"
+            label="Email"
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+            error={!!emailError}
+            InputProps={{
+              endAdornment: emailError && (
+                <InputAdornment position="end">
+                  <Tooltip title={emailError} placement="top">
+                    <ErrorIcon color="error" data-testid="email-error-icon" />
+                  </Tooltip>
+                </InputAdornment>
+              )
+            }}
+          />
           <TextField
             className={classes.textInput}
             id="username"
@@ -144,21 +155,14 @@ export default function LoginPage({ history, location }) {
             variant="contained"
             className={classes.submitButton}
           >
-            Login
+            Register
           </Button>
           <Link
             component="button"
-            onClick={() => history.push('/forgot-login')}
+            onClick={() => history.push('/login')}
             className={classes.buttonLink}
           >
-            Forgot username or password
-          </Link>
-          <Link
-            component="button"
-            onClick={() => history.push('/register')}
-            className={classes.buttonLink}
-          >
-            Register an account
+            Have an account? Login instead.
           </Link>
         </Box>
       </Paper>
@@ -166,12 +170,8 @@ export default function LoginPage({ history, location }) {
   )
 }
 
-LoginPage.propTypes = {
+RegisterPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
-    state: PropTypes.any,
   }).isRequired,
 }
