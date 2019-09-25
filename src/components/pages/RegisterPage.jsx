@@ -42,9 +42,11 @@ export default function RegisterPage({ history }) {
   const [email, setEmail] = React.useState('')
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const [confirmPassword, setConfirmPassword] = React.useState('')
   const [emailError, setEmailError] = React.useState('')
   const [usernameError, setUsernameError] = React.useState('')
   const [passwordError, setPasswordError] = React.useState('')
+  const [confirmPasswordError, setConfirmPasswordError] = React.useState('')
 
   const validateForm = () => {
     let noError = true
@@ -71,6 +73,13 @@ export default function RegisterPage({ history }) {
       setPasswordError('Password cannot be empty')
     } else {
       setPasswordError('')
+    }
+
+    if (confirmPassword !== password) {
+      noError = false
+      setConfirmPasswordError('Passwords should match')
+    } else {
+      setConfirmPasswordError('')
     }
 
     return noError
@@ -144,6 +153,24 @@ export default function RegisterPage({ history }) {
                 <InputAdornment position="end">
                   <Tooltip title={passwordError} placement="top">
                     <ErrorIcon color="error" data-testid="password-error-icon" />
+                  </Tooltip>
+                </InputAdornment>
+              )
+            }}
+          />
+          <TextField
+            className={classes.textInput}
+            id="confirm-password"
+            label="Confirm password"
+            value={confirmPassword}
+            onChange={event => setConfirmPassword(event.target.value)}
+            type="password"
+            error={!!confirmPasswordError}
+            InputProps={{
+              endAdornment: confirmPasswordError && (
+                <InputAdornment position="end">
+                  <Tooltip title={confirmPasswordError} placement="top">
+                    <ErrorIcon color="error" data-testid="confirm-password-error-icon" />
                   </Tooltip>
                 </InputAdornment>
               )
